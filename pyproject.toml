@@ -1,7 +1,8 @@
 [tool.poetry]
 name = "typed-lazyimport"
-version = "0.1.0"
+version = "0.1.1"
 description = "Provides type hinted lazy import of slow to load libraries"
+homepage = "https://github.com/jojje/typed-lazyimport"
 keywords = ["lazy", "import"]
 
 authors =  ["jojje <tinjon+pypi@gmail.com>"]
@@ -21,8 +22,7 @@ packages = [
     {include = "lazyimport"},
 ]
 
-[tool.project.urls]
-"Homepage" = "https://github.com/jojje/typed-lazyimport"
+[tool.poetry.urls]
 "Bug Tracker" = "https://github.com/jojje/typed-lazyimport/issues"
 
 [tool.poetry.dependencies]
