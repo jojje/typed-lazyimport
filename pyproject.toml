@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "typed-lazyimport"
+version = "0.1.0"
+description = "Provides type hinted lazy import of slow to load libraries"
+keywords = ["lazy", "import"]
+
+authors =  ["jojje <tinjon+pypi@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Topic :: Software Development :: Libraries",
+    "OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+]
+
+packages = [
+    {include = "lazyimport"},
+]
+
+[tool.project.urls]
+"Homepage" = "https://github.com/jojje/typed-lazyimport"
+"Bug Tracker" = "https://github.com/jojje/typed-lazyimport/issues"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = ">=6.0.0"
+tomli = "^2.0.1"
+poetry = "^1.6.1"
+
+[tool.flake8]
+max-line-length = 120
+exclude = [".git", "tests/*", ".venv"]
+max-complexity = 10
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
