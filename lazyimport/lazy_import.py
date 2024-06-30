@@ -5,6 +5,7 @@ import logging
 
 logger = logging.getLogger('LazyImporter')
 
+
 class LazyLoader:
     """Loads the library on first attribute access of the library this proxy instance is in charge of.
        This behavior allows for cheap module name aliasing, without triggering loading of the actual library.

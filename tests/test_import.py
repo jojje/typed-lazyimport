@@ -2,6 +2,7 @@ import unittest
 from types import ModuleType
 from lazyimport.lazy_import import Lib, LazyLoader
 
+
 class TestLazyImport(unittest.TestCase):
     def test_ensure_expected_lazy_loading_behavior(self):
         class LazyLibs:
