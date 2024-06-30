@@ -115,10 +115,11 @@ as can be seen by the minimal implementation of this package itself.
 
 ## Development
 
-To execute the main function of the programs, either of the following options are viable
+To run the unit tests
 
-1. `python -m typed-lazyimport`
-2. `python typed-lazyimport/__main__.py`
+```python
+python -m unittest
+```
 
 To simplify development, common actions are provided via [Makefile](Makefile) targets:
 
