@@ -159,6 +159,10 @@ as well as the unit-test in this project for an example that does just that. Tak
 [lazy_import.py](./lazyimport/lazy_import.py) implementation itself for how to get typing support. It's really trivial
 as can be seen by the minimal implementation of this package itself.
 
+### Q4: How can I see when the import happens?
+
+Enable debug logging. `lazy import: <module name>` will be logged whenever a module is imported.
+
 
 ## Development
 
