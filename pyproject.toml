@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "typed-lazyimport"
-version = "0.1.5"
-description = "Provides type hinted lazy import of slow to load libraries"
+version = "0.2.0"
+description = "Provides type hinted lazy import for slow to load libraries"
 homepage = "https://github.com/jojje/typed-lazyimport"
 keywords = ["lazy", "import"]
 
