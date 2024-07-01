@@ -29,9 +29,10 @@ packages = [
 python = "^3.8.1"
 
 [tool.poetry.group.dev.dependencies]
-flake8 = ">=6.0.0"
+flake8 = "^7.1.0"
 tomli = "^2.0.1"
-poetry = "^1.6.1"
+poetry = "^1.8.3"
+mypy = "^1.10.1"
 
 [tool.flake8]
 max-line-length = 120
