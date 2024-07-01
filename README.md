@@ -30,6 +30,21 @@ if condition:
 ...
 ```
 
+## Included libraries
+
+The following set of libraries are currently included in `Libs` out of the box, ready for lazy importing (provided you have any of them installed of course).
+
+* `cv2` ([Python OpenCV binding](https://pypi.org/project/opencv-python/))
+* `matplotlib`
+* `numpy`
+* `pandas`
+* `pytorch_lightning`
+* `sklearn`
+* `torch`
+* `torchvision`
+
+Check the [source](https://github.com/jojje/typed-lazyimport/blob/0.1.3/lazyimport/lazy_import.py#L82) for the latest set of libraries bundled, since the above list may not always be updated in the readme when new packages are added to the `Libs` _convenience_ library set.
+
 ## Extending or lazily loading your own libraries
 
 The provided `Libs` set is offered simply as a convenience, to offer close to zero-friction in order to gain lazy
