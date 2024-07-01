@@ -30,7 +30,8 @@ class LazyLoader:
         if attr == '_module':                                               # avoid infinite recursion
             object.__setattr__(self, attr, value)
         else:
-            setattr(self._module, attr, value)
+            hasattr(self, '_ensure_imported')                               # trigger module import if not already
+            setattr(self._module, attr, value)                              # then assign the value to it
 
 
 class Lib:

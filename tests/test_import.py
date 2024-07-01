@@ -36,3 +36,7 @@ class TestLazyImport(unittest.TestCase):
 
         self.assertEqual(f(3), 3)
         self.assertEqual(Florker().echo(4), 4)
+
+    def test_ensure_module_loading_if_first_use_is_variable_assignment(self):
+        lib = LazyLoader('tests.fixture')
+        lib.foo = 123  # throws an AttributeError if the module had not been loaded (can't assign new atts to str)
