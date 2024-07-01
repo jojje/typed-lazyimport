@@ -90,6 +90,17 @@ To ensure there's no spelling mistake, my recommendation is to first enter `impo
 interactive python, to verify the string is correct. Then copy the statement verbatim and quote it. That's the
 least risky option I found (absent a better python type system).
 
+If you don't want/use any type hints, then creating your own lazy-loaded library set is about as
+[DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and concise as can be.
+
+```python
+from lazyimport import Lib
+
+class Libraries:
+    Image = Lib('PIL.Image')
+    mylibs = Lib('myown.libs')
+```
+
 ## FAQ
 
 ### Q1: Why?
