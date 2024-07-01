@@ -46,18 +46,18 @@ from lazyimport import Lib
 
 if TYPE_CHECKING:                          # -"-. Skip this block if you don't need type hints.
     from PIL import Image
-    from myown.libs import flork
+    from myown import libs
 
 class Libraries:
     Image:Image = Lib('PIL.Image')         # the string the same format as "import" requires.
-    flork:flork = Lib('myown.libs.flork')
+    mylibs:libs = Lib('myown.libs')
 ```
 
 Then you can happily use it with the same ease as the bundled library set:
 
 ```python
 from mylibs import Libraries as L
-flork = L.flork
+flork = L.mylibs.flork
 Image = L.Image
 
 flork(Image.open('cat.png'))
