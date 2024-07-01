@@ -24,7 +24,27 @@ class LazyLoader:
         return getattr(self._parent._lib, attr)                             # return the requested attribute value
 
 
-class Lib:  # field descriptor
+class Lib:
+    """Field descriptor that lazily imports the named library on first attribute access.
+
+    Example use:
+    ```
+    # e.g. mylibs.py
+    class MyLibs:
+        Image = Lib('PIL.Image')  # string has the same syntax as a normal import
+        mylib = Lib('mylib')
+    ```
+
+    And then use them in the code
+
+    ```
+    from mylibs import MyLibs as L
+    Image = L.Image,        # analog to plain "import ..."
+    Flork = L.mylib.Flork   # analog to "from ... import ... as ..." syntax
+    Flork(Image.open('seagull.png'))
+    ```
+    """
+
     def __init__(self, name:str):
         assert isinstance(name, str), "Library name must be a string"       # fail fast to catch bug immediately
         self._lib:Union[str, ModuleType] = name
@@ -57,8 +77,8 @@ class Libs:
        print(torch.__version__)  # does trigger torch to be imported, and the attribute value returned
        ```
 
-       To see when importing takes place, enable debug level logging
-    """
+       To see when importing takes place, enable debug level logging"""
+
     cv2:cv2 = Lib('cv2')  # type: ignore[valid-type] # noqa: F811
     matplotlib:matplotlib = Lib('matplotlib')  # type: ignore[valid-type] # noqa: F811
     numpy:numpy = Lib('cv2')  # type: ignore[valid-type] # noqa: F811

@@ -24,3 +24,15 @@ class TestLazyImport(unittest.TestCase):
 
         self.assertFalse('__version__' in vars(lib))    # as documented...
         self.assertTrue(hasattr(lib, '__version__'))    # ... but is transparent to most code use.
+
+    def test_lib_usage_example(self):
+        import tests.fixture as fixture
+
+        class LazyLibs:
+            mylib:fixture = Lib('tests.fixture')
+
+        f = LazyLibs.mylib.f                            # "from ... import ..." syntax analog, triggers the import
+        Florker = LazyLibs.mylib.Flork                  # "from ... import ... as ..." analog, from already loaded lib
+
+        self.assertEqual(f(3), 3)
+        self.assertEqual(Florker().echo(4), 4)
