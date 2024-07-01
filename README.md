@@ -1,7 +1,7 @@
 
 # typed-lazyimport
 
-Provides type hinted lazy import of slow to load libraries
+Provides type hinted lazy import for slow to load libraries
 
 # Usage
 
