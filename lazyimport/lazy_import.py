@@ -78,7 +78,7 @@ class Libs:
 
        Example use:
        ```
-       from lazy_import import Libs as L
+       from lazyimport import Libs as L
        torch = L.torch           # does not trigger an import of torch
        print(torch.__version__)  # does trigger torch to be imported, and the attribute value returned
        ```
