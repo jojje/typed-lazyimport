@@ -101,6 +101,27 @@ class Libraries:
     mylibs = Lib('myown.libs')
 ```
 
+## Lazy import without library sets
+
+If you want to do some one-off lazy imports, you can use the same proxy primitive the examples up to now have been using
+under the hood.
+
+```python
+from lazyimport import Import
+
+torch = Import('torch')      # no import is performed yet
+...
+print(torch.tensor(2) ** 2)  # now the import happens
+```
+
+The downside of this option is that if you want typing, you have to do the typing dance that PEP 484 forces you into,
+meaning importing the special annotation related primitives, making use of the type guard with the explicit library imports
+within it, then the type declarations etc..
+
+That's the reason this example was provided last and not first, since this package is primarily aimed at offering _typed_
+lazy loading. That said, if all you need is to speed up a duck-typed CLI program or similar, there's nothing wrong with
+using the lazy loader (proxy) directly, as shown in this last example.
+
 ## FAQ
 
 ### Q1: Why?
