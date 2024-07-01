@@ -9,19 +9,28 @@ logger = logging.getLogger('LazyImporter')
 
 class LazyLoader:
     """Loads the library on first attribute access of the library this proxy instance is in charge of.
-       This behavior allows for cheap module name aliasing, without triggering loading of the actual library.
+       This behavior allows for cheap module name aliasing, without triggering loading of the actual library."""
 
-       Caveat: doing `dir(library)` will not show the attributes of the real library until at least one
-       property has been accessed. Instead you'll see the attributes of this proxy object."""
+    def __init__(self, name:str):
+        assert isinstance(name, str), "Library name must be a string"       # fail fast to catch bug immediately
+        self._module: Union[str, ModuleType] = name
 
-    def __init__(self, parent:Lib):
-        self._parent = parent
+    def __getattribute__(self, attr):
+        if attr == '_module':                                               # avoid infinite recursion
+            return object.__getattribute__(self, attr)
 
-    def __getattr__(self, attr:str):
-        if isinstance(self._parent._lib, str):                              # if library has not yet been loaded
-            logger.debug(f'lazy import: {self._parent._lib}')
-            self._parent._lib = importlib.import_module(self._parent._lib)  # swap the lib name for the actual library
-        return getattr(self._parent._lib, attr)                             # return the requested attribute value
+        module = self._module                                               # avoid calling getattribute twice
+        if isinstance(module, str):                                         # not yet loaded
+            logger.debug(f'lazy import: {module}')
+            self._module = module = importlib.import_module(module)         # swap the lib name for the actual library
+
+        return getattr(module, attr)
+
+    def __setattr__(self, attr, value):
+        if attr == '_module':                                               # avoid infinite recursion
+            object.__setattr__(self, attr, value)
+        else:
+            setattr(self._module, attr, value)
 
 
 class Lib:
@@ -45,14 +54,11 @@ class Lib:
     ```
     """
 
-    def __init__(self, name:str):
-        assert isinstance(name, str), "Library name must be a string"       # fail fast to catch bug immediately
-        self._lib:Union[str, ModuleType] = name
+    def __init__(self, module_name:str):
+        self._module = LazyLoader(module_name)
 
     def __get__(self, obj, objtype=None):
-        if isinstance(self._lib, str):     # defer importing of the library initially
-            return LazyLoader(self)
-        return self._lib                   # when the library has already been imported, just return it.
+        return self._module
 
 
 if TYPE_CHECKING:
