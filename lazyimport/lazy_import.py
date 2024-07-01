@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
+from types import ModuleType
 import importlib
 import logging
 
@@ -25,7 +26,8 @@ class LazyLoader:
 
 class Lib:  # field descriptor
     def __init__(self, name:str):
-        self._lib = name
+        assert isinstance(name, str), "Library name must be a string"       # fail fast to catch bug immediately
+        self._lib:Union[str, ModuleType] = name
 
     def __get__(self, obj, objtype=None):
         if isinstance(self._lib, str):     # defer importing of the library initially
@@ -57,12 +59,12 @@ class Libs:
 
        To see when importing takes place, enable debug level logging
     """
-    cv2:cv2 = Lib('cv2')  # noqa: F811
-    matplotlib:matplotlib = Lib('matplotlib')  # noqa: F811
-    numpy:numpy = Lib('cv2')  # noqa: F811
-    pandas:pandas = Lib('pandas')  # noqa: F811
-    pyplot:pyplot = Lib('matplotlib.pyplot')  # noqa: F811
+    cv2:cv2 = Lib('cv2')  # type: ignore[valid-type] # noqa: F811
+    matplotlib:matplotlib = Lib('matplotlib')  # type: ignore[valid-type] # noqa: F811
+    numpy:numpy = Lib('cv2')  # type: ignore[valid-type] # noqa: F811
+    pandas:pandas = Lib('pandas')  # type: ignore[valid-type] # noqa: F811
+    pyplot:pyplot = Lib('matplotlib.pyplot')  # type: ignore[valid-type] # noqa: F811
     pytorch_lightning:pytorch_lightning = Lib('pytorch_lightning')  # noqa: F811
     sklearn:sklearn = Lib('sklearn')  # noqa: F811
-    torch:torch = Lib('torch')  # noqa: F811
+    torch:torch = Lib('torch')  # type: ignore[valid-type] # noqa: F811
     torchvision:torchvision = Lib('torchvision')  # noqa: F811

@@ -4,6 +4,7 @@ test:
 
 lint:
 	python -m flake8 --max-line-length 120 --ignore E231
+	python -m mypy -m lazyimport --ignore-missing-imports
 
 build:
 	poetry build --format wheel
